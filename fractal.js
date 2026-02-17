@@ -174,7 +174,7 @@ function drawSpinningPolygons() {
         ctx.font = `600 ${size}px monospace`;
         ctx.fillStyle = getGreyColor();
         ctx.globalAlpha = alpha;
-        ctx.fillText('Ⲁ Ⲙ Ⲟ ꓤ Ⲟ', 0, 0);
+        ctx.fillText('NAHUEL', 0, 0);
         ctx.globalAlpha = 1;
         ctx.restore();
     }

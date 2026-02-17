@@ -197,6 +197,12 @@ body {
     border: 0;
 }
 
+.soundcloudFrame {
+    width: 100%;
+    height: 120px;
+    border: 0;
+}
+
 .contactLine {
     margin-top: 14px;
 }
