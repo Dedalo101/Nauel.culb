@@ -58,6 +58,11 @@ function renderShows() {
   const frag = document.createDocumentFragment();
 
   for (const show of shows) {
+    const isSoundcloud = show.source === 'soundcloud';
+    const sourceLabel = isSoundcloud ? 'SoundCloud' : 'Mixcloud';
+    const frameClass = isSoundcloud ? 'soundcloudFrame' : 'mixcloudFrame';
+    const embedSrc = isSoundcloud ? soundcloudEmbedSrc(show.url) : mixcloudEmbedSrc(show.url);
+
     const card = document.createElement('article');
     card.className = 'setCard';
 
@@ -71,19 +76,17 @@ function renderShows() {
     link.textContent = show.title;
 
     const meta = document.createElement('small');
-    meta.textContent = show.source === 'soundcloud' ? 'SoundCloud' : 'Mixcloud';
+    meta.textContent = sourceLabel;
 
     titleRow.appendChild(link);
     titleRow.appendChild(meta);
 
     const iframe = document.createElement('iframe');
-    iframe.className = show.source === 'soundcloud' ? 'soundcloudFrame' : 'mixcloudFrame';
+    iframe.className = frameClass;
     iframe.loading = 'lazy';
     iframe.allow = 'autoplay';
-    iframe.src = show.source === 'soundcloud'
-      ? soundcloudEmbedSrc(show.url)
-      : mixcloudEmbedSrc(show.url);
-    iframe.title = `${show.title} (${show.source === 'soundcloud' ? 'SoundCloud' : 'Mixcloud'} embed)`;
+    iframe.src = embedSrc;
+    iframe.title = `${show.title} (${sourceLabel} embed)`;
 
     card.appendChild(titleRow);
     card.appendChild(iframe);

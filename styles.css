@@ -191,12 +191,7 @@ body {
     opacity: 0.75;
 }
 
-.mixcloudFrame {
-    width: 100%;
-    height: 120px;
-    border: 0;
-}
-
+.mixcloudFrame,
 .soundcloudFrame {
     width: 100%;
     height: 120px;
