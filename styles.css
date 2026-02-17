@@ -207,6 +207,32 @@ body {
     background: rgba(0, 0, 0, 0.38);
 }
 
+.youtubeCard {
+    padding: 40px 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(0, 0, 0, 0.38);
+}
+
+.youtubeCard p {
+    margin-bottom: 14px;
+    opacity: 0.9;
+}
+
+.youtubeCard a {
+    color: var(--accent, #fff);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(0, 0, 0, 0.45);
+    padding: 10px 20px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.youtubeCard a:hover {
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
 .contactLine {
     margin-top: 14px;
 }
