@@ -33,13 +33,6 @@ function shuffleInPlace(arr) {
   return arr;
 }
 
-function mixcloudEmbedSrc(showUrl) {
-  // Mixcloud widget expects an encoded feed path.
-  const u = new URL(showUrl);
-  const feed = encodeURIComponent(u.pathname);
-  return `https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=${feed}`;
-}
-
 function soundcloudEmbedSrc(showUrl) {
   // SoundCloud widget embeds a track via the API widget.
   return `https://w.soundcloud.com/player/?url=${encodeURIComponent(showUrl)}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
@@ -54,9 +47,9 @@ function renderShows() {
 
   for (const show of shows) {
     const isSoundcloud = show.source === 'soundcloud';
-    const sourceLabel = isSoundcloud ? 'SoundCloud' : 'Mixcloud';
-    const frameClass = isSoundcloud ? 'soundcloudFrame' : 'mixcloudFrame';
-    const embedSrc = isSoundcloud ? soundcloudEmbedSrc(show.url) : mixcloudEmbedSrc(show.url);
+    const sourceLabel = 'SoundCloud';
+    const frameClass = 'soundcloudFrame';
+    const embedSrc = soundcloudEmbedSrc(show.url);
 
     const card = document.createElement('article');
     card.className = 'setCard';
