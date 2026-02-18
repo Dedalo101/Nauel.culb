@@ -1,4 +1,4 @@
-// Never Not Playing
+// DJ, vinyl collector, and passionate explorer of electronic music
 // Vector lines, changing colors, spinning geometries at varying speeds/sizes/shapes
 
 const canvas = document.getElementById('fractalCanvas');

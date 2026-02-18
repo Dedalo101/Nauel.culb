@@ -161,7 +161,7 @@ function initContactBubble() {
 
 function initHeader() {
   // Set the page title to match the new branding.
-  document.title = 'Nahuel — Never Not Playing';
+  document.title = 'Nahuel — DJ, vinyl collector, and passionate explorer of electronic music';
 
   // Keep accent shifting over time for a living/glitchy feel.
   setAccentFromTime();
