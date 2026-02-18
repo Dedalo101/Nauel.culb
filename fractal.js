@@ -14,16 +14,16 @@ let lastMoveTime = 0;
 let isTouch = false;
 let fadeOpacity = 0.03;
 
-// Colors: vibrant, ethereal blues, purples, golds, reds
-const greyColors = ['#00FFFF', '#FF00FF', '#FFFF00', '#FF4500', '#9370DB'];
+// Colors: sophisticated, moody palette - warm terracottas, deep oranges, refined purples and teals
+const greyColors = ['#E8743B', '#B85C3A', '#8A5F8F', '#4B7A7F', '#D9A75E', '#C05556', '#6B7A8F'];
 
 // Constants
 const TEMPO = 128 / 60;
-const PULSE_FREQ = TEMPO * 4; // Slower pulse for ethereal feel
-const FLASH_THRESHOLD = 0.95;
-const GLITCH_FREQ = TEMPO * 2;
-const STOP_THRESHOLD = 0.5;
-const COLOR_SWAP_SPEED = 0.03; // Slower swap
+const PULSE_FREQ = TEMPO * 3; // Slower, more sophisticated pulse
+const FLASH_THRESHOLD = 0.92;
+const GLITCH_FREQ = TEMPO * 1.5;
+const STOP_THRESHOLD = 0.75;
+const COLOR_SWAP_SPEED = 0.015; // Much slower color transitions for mood
 
 // Random center title pulses (slow fade in/out)
 const centerTitlePulse = {
@@ -95,7 +95,7 @@ document.addEventListener('touchend', () => {
 
 // Pulse
 function pulseScale() {
-    return 1 + 0.2 * Math.abs(Math.sin(time * PULSE_FREQ * Math.PI * 2));
+    return 1 + 0.12 * Math.abs(Math.sin(time * PULSE_FREQ * Math.PI * 2));
 }
 
 // Get color
@@ -131,12 +131,12 @@ function hslToRgb(h, s, l) {
 function drawSpinningPolygons() {
     const centerX = width / 2;
     const centerY = height / 2;
-    const numLayers = 5 + Math.floor(mouseY * 5);
+    const numLayers = 4 + Math.floor(mouseY * 4);
     
     for (let layer = 0; layer < numLayers; layer++) {
-        const sides = 3 + layer % 4; // Vary shapes: triangle, square, pentagon, hexagon
-        const radius = (50 + layer * 30) * pulseScale() * (0.5 + mouseX);
-        const speed = (layer % 2 ? 1 : -1) * (0.05 + layer * 0.01); // Different speeds/directions
+        const sides = 4 + layer % 3; // Vary shapes: square, pentagon, hexagon
+        const radius = (60 + layer * 40) * pulseScale() * (0.6 + mouseX * 0.4);
+        const speed = (layer % 2 ? 1 : -1) * (0.03 + layer * 0.006); // Slower, more measured rotations
         const rotation = time * speed;
         
         ctx.save();
@@ -154,8 +154,10 @@ function drawSpinningPolygons() {
         ctx.closePath();
         
         ctx.strokeStyle = getGreyColor(layer / numLayers);
-        ctx.lineWidth = 2 + (numLayers - layer) * 0.5;
+        ctx.lineWidth = 1.5 + (numLayers - layer) * 0.4;
+        ctx.globalAlpha = 0.7 + (layer / numLayers) * 0.3;
         ctx.stroke();
+        ctx.globalAlpha = 1;
         
         ctx.restore();
     }
@@ -310,12 +312,12 @@ function applyGlitch() {
 function animate() {
     time += 0.02;
     
-    fadeOpacity = Math.min(0.08, fadeOpacity + 0.00005); // Slow disappear
+    fadeOpacity = Math.min(0.12, fadeOpacity + 0.00008); // Slightly slower fade for mood
     ctx.fillStyle = `rgba(0, 0, 0, ${fadeOpacity})`;
     ctx.fillRect(0, 0, width, height);
     
     if (Math.sin(time * PULSE_FREQ * Math.PI * 2) > FLASH_THRESHOLD) {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
         ctx.fillRect(0, 0, width, height);
     }
     

@@ -4,7 +4,6 @@
 //   https://www.instagram.com/nahuelthings
 
 const SOUNDCLOUD_PROFILE_URL = 'https://soundcloud.com/nahuel-mendez-isla';
-const SOUNDCLOUD_PROFILE_URL = 'https://soundcloud.com/nahuel-mendez-isla';
 const INSTAGRAM_URL = 'https://www.instagram.com/nahuelthings';
 const CONTACT_EMAIL = 'GlueRecords@revamail.com';
 
@@ -18,7 +17,7 @@ const SHOWS = [
   { title: 'Ladybug', url: 'https://soundcloud.com/nahuel-mendez-isla/ladybug', source: 'soundcloud' }
 ];
 
-const ACCENTS = ['#00FFFF', '#FF00FF', '#FFFF00', '#FF4500', '#9370DB'];
+const ACCENTS = ['#E8743B', '#B85C3A', '#8A5F8F', '#4B7A7F', '#D9A75E'];
 
 function setAccentFromTime() {
   const idx = Math.floor((Date.now() / 1000) * 0.3) % ACCENTS.length;
@@ -39,7 +38,7 @@ function soundcloudEmbedSrc(showUrl) {
 }
 
 function renderShows() {
-  const root = document.getElementById('mixcloudSets');
+  const root = document.getElementById('soundcloudSets');
   if (!root) return;
 
   const shows = shuffleInPlace([...SHOWS]);
