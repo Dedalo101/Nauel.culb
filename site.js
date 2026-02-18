@@ -1,26 +1,21 @@
-// Mixcloud + SoundCloud embeds + contact bubble behavior
+// SoundCloud embeds + contact bubble behavior
 // Sources:
-//   https://www.mixcloud.com/amooro/
 //   https://soundcloud.com/nahuel-mendez-isla
 //   https://www.instagram.com/nahuelthings
 
-const MIXCLOUD_PROFILE_URL = 'https://www.mixcloud.com/amooro/';
+const SOUNDCLOUD_PROFILE_URL = 'https://soundcloud.com/nahuel-mendez-isla';
 const SOUNDCLOUD_PROFILE_URL = 'https://soundcloud.com/nahuel-mendez-isla';
 const INSTAGRAM_URL = 'https://www.instagram.com/nahuelthings';
 const CONTACT_EMAIL = 'GlueRecords@revamail.com';
 
-// Extracted from Mixcloud profile (All shows) – titles updated to Nahuel
+// Extracted from SoundCloud profile
 const SHOWS = [
-  { title: 'Nahuel - Sticky fingers', url: 'https://www.mixcloud.com/amooro/deep-fingers/', source: 'mixcloud' },
-  { title: 'Nahuel - TRICKS OR TREAT?', url: 'https://www.mixcloud.com/amooro/amoro-tricks-or-treat/', source: 'mixcloud' },
-  { title: 'Nahuel - P A S S P O R T', url: 'https://www.mixcloud.com/amooro/a-m-o-r-o-p-a-s-s-p-o-r-t/', source: 'mixcloud' },
-  { title: 'Nahuel - D A C I D', url: 'https://www.mixcloud.com/amooro/a-m-o-r-o-d-a-c-i-d/', source: 'mixcloud' },
-  { title: 'Nahuel - S T R A W B E R R Y M O O N 023*', url: 'https://www.mixcloud.com/amooro/%E2%B2%81-%E2%B2%99-%E2%B2%9F-%EA%9E%85-%E2%B2%9F-s-t-r-a-w-b-e-r-r-y-m-o-o-n-023/', source: 'mixcloud' },
-  { title: 'Nahuel - D A R K F A C E', url: 'https://www.mixcloud.com/amooro/a-m-o-r-o-d-a-r-k-f-a-c-e/', source: 'mixcloud' },
-  { title: 'W E L C O M E S U N R I S E [chapterONE]', url: 'https://www.mixcloud.com/amooro/w-e-l-c-o-m-e-s-u-n-r-i-s-e-chapterone/', source: 'mixcloud' },
-  { title: 'Nahuel - 7.609.', url: 'https://www.mixcloud.com/amooro/a-m-o-r-o-7609/', source: 'mixcloud' },
-  { title: 'Nahuel - S O C O L', url: 'https://www.mixcloud.com/amooro/a-m-o-r-o-s-o-c-o-l/', source: 'mixcloud' },
-  { title: 'Nahuel - 1.984', url: 'https://www.mixcloud.com/amooro/a-m-o-r-o-a-t-m-o-s-f-e-r/', source: 'mixcloud' }
+  { title: 'Dubing', url: 'https://soundcloud.com/nahuel-mendez-isla/dubing', source: 'soundcloud' },
+  { title: 'Vinyl Only Deep House Minimal DJ Set 120 BPM', url: 'https://soundcloud.com/nahuel-mendez-isla/vinyl-only-deep-house-minimal-dj-set-120-bpm', source: 'soundcloud' },
+  { title: 'Tekval', url: 'https://soundcloud.com/nahuel-mendez-isla/tekval', source: 'soundcloud' },
+  { title: 'Swimdow', url: 'https://soundcloud.com/nahuel-mendez-isla/swimdow', source: 'soundcloud' },
+  { title: 'Amphora', url: 'https://soundcloud.com/nahuel-mendez-isla/amphora-1', source: 'soundcloud' },
+  { title: 'Ladybug', url: 'https://soundcloud.com/nahuel-mendez-isla/ladybug', source: 'soundcloud' }
 ];
 
 const ACCENTS = ['#00FFFF', '#FF00FF', '#FFFF00', '#FF4500', '#9370DB'];
@@ -181,10 +176,6 @@ function initHeader() {
   setInterval(setAccentFromTime, 900);
 
   // Ensure social profile links are correct if they exist.
-  const mixLinks = document.querySelectorAll('a[href*="mixcloud.com"]');
-  for (const a of mixLinks) {
-    if (a.getAttribute('href') === '#') a.setAttribute('href', MIXCLOUD_PROFILE_URL);
-  }
   const scLinks = document.querySelectorAll('a[href*="soundcloud.com"]');
   for (const a of scLinks) {
     if (a.getAttribute('href') === '#') a.setAttribute('href', SOUNDCLOUD_PROFILE_URL);

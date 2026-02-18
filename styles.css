@@ -66,9 +66,25 @@ body {
 .hero {
     padding: 22px 14px;
     border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(0, 0, 0, 0.35);
+    background: url('channels4_banner.jpg') center/cover;
+    background-attachment: fixed;
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.hero h1,
+.hero p {
+    position: relative;
+    z-index: 1;
 }
 
 .scrollSpacer {
