@@ -2,9 +2,12 @@
 // Sources:
 //   https://soundcloud.com/nahuel-mendez-isla
 //   https://www.instagram.com/nahuelthings
+//   https://www.youtube.com/@nahuelmendezDJ
 
 const SOUNDCLOUD_PROFILE_URL = 'https://soundcloud.com/nahuel-mendez-isla';
 const INSTAGRAM_URL = 'https://www.instagram.com/nahuelthings';
+const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@nahuelmendezDJ';
+const YOUTUBE_VIDEOS_URL = 'https://www.youtube.com/@nahuelmendezDJ/videos';
 const CONTACT_EMAIL = 'GlueRecords@revamail.com';
 
 // Extracted from SoundCloud profile
@@ -15,6 +18,13 @@ const SHOWS = [
   { title: 'Swimdow', url: 'https://soundcloud.com/nahuel-mendez-isla/swimdow', source: 'soundcloud' },
   { title: 'Amphora', url: 'https://soundcloud.com/nahuel-mendez-isla/amphora-1', source: 'soundcloud' },
   { title: 'Ladybug', url: 'https://soundcloud.com/nahuel-mendez-isla/ladybug', source: 'soundcloud' }
+];
+
+// YouTube videos - add your video IDs here
+// Example format: { title: 'Video Title', videoId: 'dQw4w9WgXcQ', source: 'youtube' }
+const YOUTUBE_VIDEOS = [
+  // To add YouTube videos, provide the video ID from YouTube URLs
+  // Get the ID from: https://www.youtube.com/watch?v=VIDEO_ID
 ];
 
 const ACCENTS = ['#E8743B', '#B85C3A', '#8A5F8F', '#4B7A7F', '#D9A75E'];
@@ -35,6 +45,11 @@ function shuffleInPlace(arr) {
 function soundcloudEmbedSrc(showUrl) {
   // SoundCloud widget embeds a track via the API widget.
   return `https://w.soundcloud.com/player/?url=${encodeURIComponent(showUrl)}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
+}
+
+function youtubeEmbedSrc(videoId) {
+  // YouTube embed URL from video ID
+  return `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?rel=0`;
 }
 
 function renderShows() {
@@ -74,6 +89,58 @@ function renderShows() {
     iframe.allow = 'autoplay';
     iframe.src = embedSrc;
     iframe.title = `${show.title} (${sourceLabel} embed)`;
+
+    card.appendChild(titleRow);
+    card.appendChild(iframe);
+
+    frag.appendChild(card);
+  }
+
+  root.innerHTML = '';
+  root.appendChild(frag);
+
+  // Subtle glitch pulse on random cards
+  setInterval(() => {
+    const cards = root.querySelectorAll('.setCard');
+    if (!cards.length) return;
+    const pick = cards[Math.floor(Math.random() * cards.length)];
+    pick.classList.add('isGlitch');
+    setTimeout(() => pick.classList.remove('isGlitch'), 360);
+  }, 900);
+}
+
+function renderYoutubeVideos() {
+  const root = document.getElementById('youtubeVideos');
+  if (!root || !YOUTUBE_VIDEOS.length) return;
+
+  const videos = shuffleInPlace([...YOUTUBE_VIDEOS]);
+  const frag = document.createDocumentFragment();
+
+  for (const video of videos) {
+    const card = document.createElement('article');
+    card.className = 'setCard';
+
+    const titleRow = document.createElement('div');
+    titleRow.className = 'setTitle';
+
+    const link = document.createElement('a');
+    link.href = `https://www.youtube.com/watch?v=${video.videoId}`;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = video.title;
+
+    const meta = document.createElement('small');
+    meta.textContent = 'YouTube';
+
+    titleRow.appendChild(link);
+    titleRow.appendChild(meta);
+
+    const iframe = document.createElement('iframe');
+    iframe.className = 'youtubeFrame';
+    iframe.loading = 'lazy';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.src = youtubeEmbedSrc(video.videoId);
+    iframe.title = `${video.title} (YouTube embed)`;
 
     card.appendChild(titleRow);
     card.appendChild(iframe);
@@ -176,11 +243,16 @@ function initHeader() {
   for (const a of igLinks) {
     if (a.getAttribute('href') === '#') a.setAttribute('href', INSTAGRAM_URL);
   }
+  const ytLinks = document.querySelectorAll('a[href*="youtube.com"]');
+  for (const a of ytLinks) {
+    if (a.getAttribute('href') === '#') a.setAttribute('href', YOUTUBE_CHANNEL_URL);
+  }
 }
 
 function init() {
   initHeader();
   renderShows();
+  renderYoutubeVideos();
   initContactBubble();
 }
 
